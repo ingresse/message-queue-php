@@ -50,18 +50,14 @@ class AMQPAdapter implements AdapterInterface
      */
     public function __construct(ConfigInterface $config)
     {
-        try {
-            $this->config     = $config->getConfig();
-            $this->logger     = $this->prepareLogger($config);
-            $this->connection = $this->prepareConnection();
-            $this->channel    = $this->connection->channel();
-            $this->setQueues();
-            $this->setExchanges();
-        } catch (Exception $exception) {
-            throw new Exception('AMQPAdapter can not be loaded.
-                Check config settings and/or access to AMQP Server');
-        }
+        $this->config     = $config->getConfig();
+        $this->logger     = $this->prepareLogger($config);
+        $this->connection = $this->prepareConnection();
+        $this->channel    = $this->connection->channel();
+        $this->setQueues();
+        $this->setExchanges();
     }
+
 
     /**
      * @return PhpAmqpLib\Connection\AMQPStreamConnection
