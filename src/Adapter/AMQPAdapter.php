@@ -50,8 +50,17 @@ class AMQPAdapter implements AdapterInterface
             $this->setQueues();
             $this->setExchanges();
         } catch (Exception $exception) {
+
+            $detail = [
+                'message' => $exception->getMessage(),
+                'trace'    => $exception->getTraceAsString(),
+                'config'    => $config->getConfig()
+            ];
+
+            $msgError = json_encode($detail);
+
             throw new Exception('AMQPAdapter can not be loaded.
-                Check config settings and/or access to AMQP Server');
+                Check config settings and/or access to AMQP Server: ' . $msgError);
         }
     }
 
