@@ -53,8 +53,8 @@ class AMQPAdapter implements AdapterInterface
 
             $detail = [
                 'message' => $exception->getMessage(),
-                'trace'    => $exception->getTraceAsString(),
-                'config'    => $config->getConfig()
+                'config'    => $config->getConfig(),
+                'trace'    => $exception->getTraceAsString()
             ];
 
             $msgError = json_encode($detail);
